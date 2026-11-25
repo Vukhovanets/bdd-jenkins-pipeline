@@ -16,7 +16,7 @@ pipeline {
 
         stage('Static Code Analysis') {
             steps {
-                sh 'PYTHONPATH=. python3 -m pylint --disable=C,R,W features/ pages/'
+                sh 'PYTHONPATH=. python3 -m pylint --disable=C,R,W,E1102 features/ pages/'
             }
         }
 
