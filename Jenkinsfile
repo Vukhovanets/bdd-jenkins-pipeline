@@ -8,18 +8,15 @@ pipeline {
             }
         }
 
-        stage('Static Code Analysis') {
+        stage('Install Dependencies') {
             steps {
-                sh '''
-                    pip install pylint --break-system-packages
-                    python3 -m pylint --disable=C,R features/ pages/
-                '''
+                sh 'pip install -r requirements.txt pylint --break-system-packages'
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Static Code Analysis') {
             steps {
-                sh 'pip install -r requirements.txt --break-system-packages'
+                sh 'PYTHONPATH=. python3 -m pylint --disable=C,R,W features/ pages/'
             }
         }
 
